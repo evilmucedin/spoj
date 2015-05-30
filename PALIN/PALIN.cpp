@@ -13,23 +13,24 @@ void IncPalindrome(const string& s, int value, string* result) {
 	*result = s;
 	int mid = (result->length() - 1) / 2;
 	(*result)[mid] += value;
-	for (int i = 0; i <= mid; ++i) {
-		(*result)[result->length() - i - 1] = (*result)[i];
-	}
 	int carry = 0;
 	for (int i = result->length() - 1; i >= 0; --i) {
 		int digit = (*result)[i] + carry - '0';
 		(*result)[i] = (digit % 10) + '0';
 		carry = digit / 10;
 	}
-	if (carry) {
+    if (carry) {
 		result->resize(s.length() + 1);
 		for (int i = 0; i < result->length(); ++i) {
 			(*result)[i] = '0';
 		}
 		(*result)[0] = '1';
 		(*result)[result->length() - 1] = '1';
-	}
+    } else {
+        for (int i = 0; i <= mid; ++i) {
+            (*result)[result->length() - i - 1] = (*result)[i];
+        }
+    }
 }
 
 bool IsGreather(const string& a, const string& b) {
